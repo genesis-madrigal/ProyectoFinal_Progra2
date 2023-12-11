@@ -1,0 +1,42 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Menu.master.cs" Inherits="ProyectoFinal_Progra2.Menu" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Extreme Tech Upgrades | Tecnología a su alcance</title>
+
+    <meta charset="UTF-8">
+    <link href="css/style.css" rel="stylesheet" />
+
+    <link href="css/CSSdgv+butons.css" rel="stylesheet" />
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            width: 88px;
+            height: 85px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        
+        <nav class="navbar navbar-light" style="background-color: #dce6f2;">
+        <nav class="nav nav-pills flex-column flex-sm-row">
+            <img src="Images/Screenshot_2023-11-20_235107-removebg-preview.png" class="auto-style1"/>
+            <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="Home.aspx">Inicio</a>
+            <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="Usuarios.aspx">Usuarios</a>
+            <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="Tecnicos.aspx">Técnicos</a>
+           <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="Equipos.aspx">Equipos</a>
+        </nav>
+    </nav>
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        
+    </form>
+</body>
+</html>
