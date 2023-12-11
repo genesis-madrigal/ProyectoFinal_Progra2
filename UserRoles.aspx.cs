@@ -10,14 +10,16 @@ using System.Web.UI.WebControls;
 
 namespace ProyectoFinal_Progra2
 {
-    public partial class Reparaciones : System.Web.UI.Page
+    public partial class Roles : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 LlenarGrid();
+
                 LlenarDropdown();
+
             }
         }
 
@@ -26,7 +28,7 @@ namespace ProyectoFinal_Progra2
             string constr = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT *  FROM Reparaciones"))
+                using (SqlCommand cmd = new SqlCommand("SELECT *  FROM UserRoles"))
                 {
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
@@ -35,8 +37,8 @@ namespace ProyectoFinal_Progra2
                         using (DataTable dt = new DataTable())
                         {
                             sda.Fill(dt);
-                            gvReparaciones.DataSource = dt;
-                            gvReparaciones.DataBind();
+                            gvUserRoles.DataSource = dt;
+                            gvUserRoles.DataBind();
                         }
                     }
                 }
@@ -47,7 +49,7 @@ namespace ProyectoFinal_Progra2
             string constr = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("Consulta_Estados"))
+                using (SqlCommand cmd = new SqlCommand("CONSULTA_ROLES"))
                 {
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
@@ -56,10 +58,10 @@ namespace ProyectoFinal_Progra2
                         using (DataTable dt = new DataTable())
                         {
                             sda.Fill(dt);
-                            ddlEstado.DataSource = dt;
+                            ddlRolID.DataSource = dt;
 
-                            ddlEstado.DataTextField = dt.Columns["ESTADO"].ToString();
-                            ddlEstado.DataBind();
+                            ddlRolID.DataTextField = dt.Columns["Rol"].ToString();
+                            ddlRolID.DataBind();
                         }
                     }
                 }

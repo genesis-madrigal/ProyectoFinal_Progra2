@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace ProyectoFinal_Progra2
 {
-    public partial class Reparaciones : System.Web.UI.Page
+    public partial class ReporteGeneral : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,7 +26,7 @@ namespace ProyectoFinal_Progra2
             string constr = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT *  FROM Reparaciones"))
+                using (SqlCommand cmd = new SqlCommand("ReporteGeneral"))
                 {
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
@@ -35,8 +35,8 @@ namespace ProyectoFinal_Progra2
                         using (DataTable dt = new DataTable())
                         {
                             sda.Fill(dt);
-                            gvReparaciones.DataSource = dt;
-                            gvReparaciones.DataBind();
+                            gvReporte.DataSource = dt;
+                            gvReporte.DataBind();
                         }
                     }
                 }
@@ -47,7 +47,7 @@ namespace ProyectoFinal_Progra2
             string constr = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("Consulta_Estados"))
+                using (SqlCommand cmd = new SqlCommand("CONSULTAR_TECNICOS"))
                 {
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
@@ -56,34 +56,46 @@ namespace ProyectoFinal_Progra2
                         using (DataTable dt = new DataTable())
                         {
                             sda.Fill(dt);
-                            ddlEstado.DataSource = dt;
+                            ddlTecnicos.DataSource = dt;
 
-                            ddlEstado.DataTextField = dt.Columns["ESTADO"].ToString();
-                            ddlEstado.DataBind();
+                            ddlTecnicos.DataTextField = dt.Columns["Nombre"].ToString();
+                            ddlTecnicos.DataValueField = dt.Columns["TecnicoID"].ToString();
+                            ddlTecnicos.DataBind();
                         }
                     }
                 }
             }
         }
 
-        protected void btnAgregar_Click(object sender, EventArgs e)
-        {
-
-        }
-
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
+            int codigo = int.Parse(ddlTecnicos.SelectedValue);
 
+            
+            string constr = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("ReporteGeneral_Filtro @CODIGO =" + codigo))
+
+
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                    cmd.Connection = con;
+                    sda.SelectCommand = cmd;
+                    using (DataTable dt = new DataTable())
+                    {
+                        sda.Fill(dt);
+                        gvReporte.DataSource = dt;
+                        gvReporte.DataBind();  // actualizar el grid view
+                    }
+                }
+            }
         }
 
-        protected void btnModificar_Click(object sender, EventArgs e)
+        protected void btnLimpiar_Click(object sender, EventArgs e)
         {
-
-        }
-
-        protected void btnEliminar_Click(object sender, EventArgs e)
-        {
-
+            LlenarGrid();
         }
     }
+   
 }

@@ -68,7 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Asignaciones.aspx" />
-    <Content Include="css\CSSdgv+butons.css" />
+    <Content Include="css\CSS.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\bootstrap\mixins\_border-radius.css" />
     <Content Include="css\bootstrap\mixins\_resize.css" />
@@ -88,7 +88,8 @@
     <Content Include="LogIn.aspx" />
     <Content Include="main.html" />
     <Content Include="Reparaciones.aspx" />
-    <Content Include="Roles.aspx" />
+    <Content Include="ReporteGeneral.aspx" />
+    <Content Include="UserRoles.aspx" />
     <Content Include="Tecnicos.aspx" />
     <Content Include="Usuarios.aspx" />
     <Content Include="Web.config" />
@@ -106,7 +107,7 @@
     <Compile Include="Classes\DetalleReparacion.cs" />
     <Compile Include="Classes\Equipo.cs" />
     <Compile Include="Classes\Reparacion.cs" />
-    <Compile Include="Classes\Roles.cs" />
+    <Compile Include="Classes\UserRoles.cs" />
     <Compile Include="Classes\SystemUser.cs" />
     <Compile Include="DetallesReparacion.aspx.cs">
       <DependentUpon>DetallesReparacion.aspx</DependentUpon>
@@ -153,12 +154,19 @@
     <Compile Include="Reparaciones.aspx.designer.cs">
       <DependentUpon>Reparaciones.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Roles.aspx.cs">
-      <DependentUpon>Roles.aspx</DependentUpon>
+    <Compile Include="ReporteGeneral.aspx.cs">
+      <DependentUpon>ReporteGeneral.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Roles.aspx.designer.cs">
-      <DependentUpon>Roles.aspx</DependentUpon>
+    <Compile Include="ReporteGeneral.aspx.designer.cs">
+      <DependentUpon>ReporteGeneral.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserRoles.aspx.cs">
+      <DependentUpon>UserRoles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserRoles.aspx.designer.cs">
+      <DependentUpon>UserRoles.aspx</DependentUpon>
     </Compile>
     <Compile Include="Tecnicos.aspx.cs">
       <DependentUpon>Tecnicos.aspx</DependentUpon>

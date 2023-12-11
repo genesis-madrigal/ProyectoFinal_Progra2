@@ -11,71 +11,53 @@ namespace ProyectoFinal_Progra2
 {
 
 
-    public partial class Reparaciones
+    public partial class Roles
     {
 
         /// <summary>
-        /// gvReparaciones control.
+        /// gvUserRoles control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvReparaciones;
+        protected global::System.Web.UI.WebControls.GridView gvUserRoles;
 
         /// <summary>
-        /// lblReparacionID control.
+        /// lblLogInUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblReparacionID;
+        protected global::System.Web.UI.WebControls.Label lblLogInUser;
 
         /// <summary>
-        /// txtReparacionID control.
+        /// tbLogInUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtReparacionID;
+        protected global::System.Web.UI.WebControls.TextBox tbLogInUser;
 
         /// <summary>
-        /// lblEquipoID control.
+        /// lblRolID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEquipoID;
+        protected global::System.Web.UI.WebControls.Label lblRolID;
 
         /// <summary>
-        /// txtEquipoID control.
+        /// ddlRolID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEquipoID;
-
-        /// <summary>
-        /// lblEstado control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEstado;
-
-        /// <summary>
-        /// ddlEstado control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEstado;
+        protected global::System.Web.UI.WebControls.DropDownList ddlRolID;
 
         /// <summary>
         /// btnAgregar control.

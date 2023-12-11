@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ProyectoFinal_Progra2.Classes
 {
-    public class Roles
+    public class UserRoles
     {
     }
 }
