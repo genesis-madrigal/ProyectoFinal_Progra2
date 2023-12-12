@@ -16,9 +16,7 @@
                 </Columns>
             </asp:GridView>
         </div>
-        </p>
-        <p>
-        </p>
+    <br />
     <p> 
             <asp:Label ID="lblUsuarioID" class="lead" runat="server" Text="ID del Usuario:"></asp:Label>
         </p>

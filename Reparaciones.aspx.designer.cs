@@ -51,13 +51,13 @@ namespace ProyectoFinal_Progra2
         protected global::System.Web.UI.WebControls.Label lblEquipoID;
 
         /// <summary>
-        /// txtEquipoID control.
+        /// ddlEquipoID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEquipoID;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEquipoID;
 
         /// <summary>
         /// lblEstado control.

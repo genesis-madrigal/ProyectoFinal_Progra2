@@ -76,7 +76,7 @@ namespace ProyectoFinal_Progra2
             {
                 using (Conn = DBConn.obtenerConexion())
                 {
-                    SqlCommand cmd = new SqlCommand("BORRAREQUIPO", Conn)
+                    SqlCommand cmd = new SqlCommand("BORRAR_EQUIPO", Conn)
                     {
                         CommandType = CommandType.StoredProcedure
                     };

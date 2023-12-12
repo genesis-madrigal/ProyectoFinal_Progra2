@@ -51,13 +51,13 @@ namespace ProyectoFinal_Progra2
         protected global::System.Web.UI.WebControls.Label lblReparacionID;
 
         /// <summary>
-        /// txtReparacionID control.
+        /// ddlReparacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtReparacionID;
+        protected global::System.Web.UI.WebControls.DropDownList ddlReparacion;
 
         /// <summary>
         /// lblTecnicoID control.
@@ -76,24 +76,6 @@ namespace ProyectoFinal_Progra2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTecnicos;
-
-        /// <summary>
-        /// lblFechaAsignacion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFechaAsignacion;
-
-        /// <summary>
-        /// txtFecha control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFecha;
 
         /// <summary>
         /// btnAgregar control.

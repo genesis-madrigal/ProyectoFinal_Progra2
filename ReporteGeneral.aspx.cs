@@ -58,7 +58,7 @@ namespace ProyectoFinal_Progra2
                             sda.Fill(dt);
                             ddlTecnicos.DataSource = dt;
 
-                            ddlTecnicos.DataTextField = dt.Columns["Nombre"].ToString();
+                            ddlTecnicos.DataTextField = dt.Columns["Tecnico"].ToString();
                             ddlTecnicos.DataValueField = dt.Columns["TecnicoID"].ToString();
                             ddlTecnicos.DataBind();
                         }

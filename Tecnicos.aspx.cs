@@ -19,7 +19,6 @@ namespace ProyectoFinal_Progra2
                 LlenarGrid();
                 //Llenartipos();
             }
-
         }
 
         public void alertas(String texto)

@@ -4,7 +4,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
        <div class="container text-center"> 
            
-       <h1 class="display-3"> &nbsp;</h1>
            <h1 class="display-3"> Mantenimiento de Reparaciones </h1>
            <p class="display-3"> &nbsp;</p>
 
@@ -40,7 +39,7 @@
             <asp:Label ID="lblEquipoID" class="lead" runat="server" Text="ID del Equipo:"></asp:Label>
         </p> 
            <p> 
-          <asp:TextBox ID="txtEquipoID"  class="round form-control" runat="server"></asp:TextBox>
+        <asp:DropDownList ID="ddlEquipoID"  class="round form-control" runat="server" OnSelectedIndexChanged="Page_Load"></asp:DropDownList>
          <br />  
 
             <p> 

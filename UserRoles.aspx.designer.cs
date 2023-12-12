@@ -11,7 +11,7 @@ namespace ProyectoFinal_Progra2
 {
 
 
-    public partial class Roles
+    public partial class UserRoles
     {
 
         /// <summary>
@@ -33,13 +33,13 @@ namespace ProyectoFinal_Progra2
         protected global::System.Web.UI.WebControls.Label lblLogInUser;
 
         /// <summary>
-        /// tbLogInUser control.
+        /// ddlLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbLogInUser;
+        protected global::System.Web.UI.WebControls.DropDownList ddlLogin;
 
         /// <summary>
         /// lblRolID control.
@@ -94,5 +94,14 @@ namespace ProyectoFinal_Progra2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEliminar;
+
+        /// <summary>
+        /// btnLimpiar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLimpiar;
     }
 }

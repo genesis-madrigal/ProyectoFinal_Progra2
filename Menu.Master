@@ -35,6 +35,7 @@
            <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="Asignaciones.aspx">Asignaciones</a>
            <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="Reparaciones.aspx">Reparaciones</a>
            <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="DetallesReparacion.aspx">Detalles de las reparaciones</a>
+           <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="SystemUsers.aspx">Usuarios del sistema</a>
            <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="UserRoles.aspx">Reporte de Roles</a>
            <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="ReporteGeneral.aspx">Reporte General</a>
            <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="LogIn.aspx">Cerrar Sesión</a>

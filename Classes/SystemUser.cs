@@ -12,7 +12,6 @@ namespace ProyectoFinal_Progra2.Classes
     {
         //atributos
         private static string LogInUser;
-        private static int UsuarioID;
         private static string Clave;
 
         //constructor
@@ -24,19 +23,10 @@ namespace ProyectoFinal_Progra2.Classes
         //Getter = me devuelve un valor
         //Setter = asignar un valor a un atributo
 
-        public int GetUsuarioID()
-        {
-            return UsuarioID;
-        }
 
         public string GetLogin()
         {
             return LogInUser;
-        }
-
-        public void SetUsuarioID(int usuarioid)
-        {
-            UsuarioID = usuarioid;
         }
 
         public void SetLogin(string login)

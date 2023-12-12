@@ -4,11 +4,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     
     <div class="container text-center">
-    <h1 class="display-3"> Mantenimiento de Equipos </h1>
+    <h1 class="display-3"> Mantenimiento de Asignaciones </h1>
         <p class="display-3"> &nbsp;</p>
-        <p class="display-3"> &nbsp;</p>
-
-       <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center">
             <br />
             <asp:GridView ID="gvAsignaciones" runat="server" AutoGenerateColumns="False" CssClass="mydatagrid" PagerStyle-CssClass="pager" HeaderStyle-CssClass="header" RowStyle-CssClass="rows" AllowPaging="True">
                 <Columns>
@@ -33,19 +31,16 @@
            <p> 
             <asp:Label ID="lblReparacionID" class="lead" runat="server" Text="ID de Reparación:"></asp:Label>
         </p> 
-        <asp:TextBox ID="txtReparacionID"  class="round form-control" runat="server"></asp:TextBox>
+        <asp:DropDownList ID="ddlReparacion"  class="round form-control" runat="server" OnSelectedIndexChanged="Page_Load"></asp:DropDownList>
          <br />  
             <p> 
             <asp:Label ID="lblTecnicoID" class="lead" runat="server" Text="ID del Técnico:"></asp:Label>
         </p> 
         <asp:DropDownList ID="ddlTecnicos"  class="round form-control" runat="server" OnSelectedIndexChanged="Page_Load"></asp:DropDownList>
-        <br />  
-        
-         <p> 
-            <asp:Label ID="lblFechaAsignacion" class="lead" runat="server" Text="Fecha de Asignación:"></asp:Label>
-        </p>
-           <br>
-        <asp:TextBox runat="server"  class="round form-control" type="date" ID="txtFecha" CssClass="form-control" />
+        <br />       
+         
+
+         
         <br /> 
 
         <asp:Button ID="btnAgregar" class="btn btn-outline-dark" runat="server" Text="Agregar" OnClick="btnAgregar_Click" />

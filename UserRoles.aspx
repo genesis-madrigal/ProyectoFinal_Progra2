@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Menu.Master" AutoEventWireup="true" CodeBehind="UserRoles.aspx.cs" Inherits="ProyectoFinal_Progra2.Roles" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Menu.Master" AutoEventWireup="true" CodeBehind="UserRoles.aspx.cs" Inherits="ProyectoFinal_Progra2.UserRoles" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -23,7 +23,7 @@
 <asp:Label ID="lblLogInUser" class="lead" runat="server" Text="Log In del Usuario:"></asp:Label>
         </p>
     <p>  
-<asp:TextBox ID="tbLogInUser" class="round form-control" runat="server" placeholder="Usuario" ></asp:TextBox>
+      <asp:DropDownList ID="ddlLogin"  class="round form-control" runat="server" OnSelectedIndexChanged="Page_Load"></asp:DropDownList>
         </p>
     <p> 
 <asp:Label ID="lblRolID" class="lead" runat="server" Text="Nombre:"></asp:Label>
@@ -37,6 +37,7 @@
         <asp:Button ID="btnConsultar" class="btn btn-outline-dark" runat="server" Text="Consultar" OnClick="btnConsultar_Click" />
         <asp:Button ID="btnModificar" class="btn btn-outline-dark" runat="server" Text="Modificar" OnClick="btnModificar_Click" />
         <asp:Button ID="btnEliminar" class="btn btn-outline-dark" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" />
+        <asp:Button ID="btnLimpiar" class="btn btn-outline-dark" runat="server" Text="Limpiar" OnClick="btnLimpiar_Click" />
     </p>
     <p> &nbsp;</p>
     
