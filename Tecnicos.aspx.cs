@@ -63,7 +63,7 @@ namespace ProyectoFinal_Progra2
 
             if (resultado > 0)
             {
-                alertas("Tipo ha sido ingresado con éxito");
+                alertas("Técnico ha sido ingresado con éxito");
                 tbTecnicoID.Text = string.Empty;
                 tbNombre.Text = string.Empty;
                 tbEspecialidad.Text = string.Empty;
@@ -71,7 +71,7 @@ namespace ProyectoFinal_Progra2
             }
             else
             {
-                alertas("Error al ingresar tipo");
+                alertas("Error al ingresar técnico");
 
             }
         }
@@ -119,7 +119,7 @@ namespace ProyectoFinal_Progra2
 
             if (resultado > 0)
             {
-                alertas("Equipo ha sido actualizado con éxito");
+                alertas("Técnico ha sido actualizado con éxito");
                 tbTecnicoID.Text = string.Empty;
                 tbNombre.Text = string.Empty;
                 tbEspecialidad.Text = string.Empty;

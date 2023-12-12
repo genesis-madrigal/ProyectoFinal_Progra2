@@ -36,7 +36,7 @@
            <p> 
             <asp:Label ID="lblFechaFin" class="lead" runat="server" Text="Fecha de finalización de la reparación:"></asp:Label>
         </p> 
-        <asp:TextBox ID="txtFechaFin"  class="round form-control" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtFechaFin"  type="date" class="round form-control" runat="server"></asp:TextBox>
          <br />  
 
         <br />  
@@ -48,6 +48,8 @@
         <asp:Button ID="btnModificar" class="btn btn-outline-dark" runat="server" Text="Modificar" OnClick="btnModificar_Click" />
         <asp:Button ID="btnEliminar" class="btn btn-outline-dark" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" />
             <br />
+
+         <asp:Label ID="lblTest" class="lead" runat="server" Text="TEST"></asp:Label>
        </div>
 
 </asp:Content>

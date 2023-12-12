@@ -122,7 +122,7 @@ namespace ProyectoFinal_Progra2
             }
             else
             {
-                alertas("Error al ingresar tipo");
+                alertas("Error al ingresar reparación");
 
             }
         }

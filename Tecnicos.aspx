@@ -36,7 +36,7 @@
 <asp:Label ID="lblEspecialidad" class="lead" runat="server" Text="Especialidad:"></asp:Label>
     </p>
     <p> 
-<asp:TextBox ID="tbEspecialidad" class="round form-control" runat="server" placeholder="Tecnico en..." ></asp:TextBox>
+<asp:TextBox ID="tbEspecialidad" class="round form-control" runat="server" placeholder="Tecnico en... (20 caracteres máx)" ></asp:TextBox>
     </p>
     <p> &nbsp;</p>
     <p> 

@@ -36,6 +36,8 @@
        </div>
 
             <p>  
+                &nbsp;</p>
+        <p>  
             <asp:Label ID="lblTecnicoID" class="lead" runat="server" Text="ID del Técnico:"></asp:Label>
              </p>
              <p>  

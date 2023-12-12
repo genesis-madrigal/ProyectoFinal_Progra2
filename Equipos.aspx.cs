@@ -91,7 +91,7 @@ namespace ProyectoFinal_Progra2
 
             if (resultado > 0)
             {
-                alertas("Tipo ha sido ingresado con éxito");
+                alertas("Equipo ha sido ingresado con éxito");
                 tbEquipoID.Text = string.Empty;
                 tbTipoEquipo.Text = string.Empty;
                 tbModelo.Text = string.Empty;
@@ -100,7 +100,7 @@ namespace ProyectoFinal_Progra2
             }
             else
             {
-                alertas("Error al ingresar tipo");
+                alertas("Error al ingresar equipo");
 
             }
         }

@@ -119,17 +119,17 @@ namespace ProyectoFinal_Progra2
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            int resultado = Tecnico.Agregar(ddlReparacion.Text, ddlTecnicos.Text);
+            int resultado = Asignacion.Agregar(ddlReparacion.Text, int.Parse(ddlTecnicos.Text));
 
             if (resultado > 0)
             {
-                alertas("Tipo ha sido ingresado con éxito");
+                alertas("Asignación ha sido ingresada con éxito");
                 txtAsignacionID.Text = string.Empty;                
                 LlenarGrid();
             }
             else
             {
-                alertas("Error al ingresar tipo");
+                alertas("Error al ingresar asignación");
 
             }
         }
@@ -168,7 +168,7 @@ namespace ProyectoFinal_Progra2
 
           if (codigo)
           {
-              resultado = Asignacion.ModificarID(int.Parse(txtAsignacionID.Text), int.Parse(ddlTecnicos.Text), int.Parse(ddlReparacion.Text));
+              resultado = Asignacion.ModificarID(int.Parse(txtAsignacionID.Text), int.Parse(ddlReparacion.Text), int.Parse(ddlTecnicos.Text));
           }
           else
           {
@@ -178,7 +178,7 @@ namespace ProyectoFinal_Progra2
 
           if (resultado > 0)
           {
-              alertas("Asignación ha sido actualizado con éxito");
+              alertas("Asignación ha sido actualizada con éxito");
               txtAsignacionID.Text = string.Empty;              
               LlenarGrid();
           }
@@ -188,7 +188,7 @@ namespace ProyectoFinal_Progra2
           }
           else
           {
-              alertas("Error al actualizar el asignación");
+              alertas("Error al actualizar la asignación");
 
           }
         }
@@ -200,13 +200,13 @@ namespace ProyectoFinal_Progra2
 
           if (resultado > 0)
           {
-              alertas("Asignación ha sido eliminado con éxito");
+              alertas("Asignación ha sido eliminada con éxito");
               txtAsignacionID.Text = string.Empty;
               LlenarGrid();
           }
           else
           {
-              alertas("Error al eliminar el técnico");
+              alertas("Error al eliminar la asignación");
 
           }
         }

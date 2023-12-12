@@ -63,7 +63,7 @@ namespace ProyectoFinal_Progra2
 
             if (resultado > 0)
             {
-                alertas("Tipo ha sido ingresado con éxito");
+                alertas("Usuario ha sido ingresado con éxito");
                 tbUsuarioID.Text = string.Empty;
                 tbNombre.Text = string.Empty;
                 tbCorreo.Text = string.Empty;
@@ -72,7 +72,7 @@ namespace ProyectoFinal_Progra2
             }
             else
             {
-                alertas("Error al ingresar tipo");
+                alertas("Error al ingresar usuario");
 
             }
         }
@@ -121,7 +121,7 @@ namespace ProyectoFinal_Progra2
 
             if (resultado > 0)
             {
-                alertas("Equipo ha sido actualizado con éxito");
+                alertas("Usuario ha sido actualizado con éxito");
                 tbUsuarioID.Text = string.Empty;
                 tbNombre.Text = string.Empty;
                 tbCorreo.Text = string.Empty;

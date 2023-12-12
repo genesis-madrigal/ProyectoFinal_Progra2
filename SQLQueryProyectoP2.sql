@@ -158,7 +158,7 @@ GO
 
 INSERT INTO Reparaciones(EquipoID, Estado) VALUES
 (1, 'A'),
-(2, 'B'),
+(2, 'P'),
 (3, 'C')
 GO
 
@@ -443,7 +443,7 @@ END
 GO
 
 CREATE PROCEDURE BORRAR_USERROLES
-@CODIGO INT
+@CODIGO VARCHAR(50)
  AS
 	BEGIN
 	  DELETE UserRoles WHERE LogInUser = @CODIGO

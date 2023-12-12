@@ -18,5 +18,20 @@
     </asp:GridView>
 </div>
 
+        <p>
+            &nbsp;</p>
+        <p>
+         <asp:Label ID="lblLogInUser" class="lead" runat="server" Text="Log In:"></asp:Label>
+        </p> 
+        <asp:TextBox ID="txtLogInUser"  class="round form-control" runat="server"></asp:TextBox>
+          <p>
+         <asp:Label ID="lblClave" class="lead" runat="server" Text="Clave:"></asp:Label>
+        </p> 
+        <asp:TextBox ID="txtClave"  class="round form-control" runat="server"></asp:TextBox>
+        <br />
+        <asp:Button ID="btnAgregar" class="btn btn-outline-dark" runat="server" Text="Agregar" OnClick="btnAgregar_Click" />
+        <asp:Button ID="btnConsultar" class="btn btn-outline-dark" runat="server" Text="Consultar" OnClick="btnConsultar_Click" />
+        <asp:Button ID="btnModificar" class="btn btn-outline-dark" runat="server" Text="Modificar" OnClick="btnModificar_Click" />
+        <asp:Button ID="btnEliminar" class="btn btn-outline-dark" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" />
 
 </asp:Content>
