@@ -23,8 +23,8 @@
             <br />
        </div>
 
-            <p> 
-            <asp:Label ID="lblAsignacionID" class="lead" runat="server" Text="ID de la Asignación:"></asp:Label>
+            <p>   &nbsp;</p>
+        <p>   &nbsp;<asp:Label ID="lblAsignacionID" class="lead" runat="server" Text="ID de la Asignación:"></asp:Label>
         </p> 
         <asp:TextBox ID="txtAsignacionID"  class="round form-control" runat="server"></asp:TextBox>
         <br />

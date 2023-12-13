@@ -13,13 +13,36 @@ namespace ProyectoFinal_Progra2
 {
     public partial class Reparaciones : System.Web.UI.Page
     {
+
+        private static Classes.SystemUser objsystemuser;
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                objsystemuser = new Classes.SystemUser();
+
+                objsystemuser.SetLogin(Session["LogInUser"].ToString());
+                objsystemuser.SetRol(int.Parse(Session["RolID"].ToString()));
+
+                if(objsystemuser.GetRol() == 3) 
+                {
+                    form.Visible = false;
+
+                }else if (objsystemuser.GetRol() == 2)
+                {
+                    lblEquipoID.Visible = false;
+                    ddlEquipoID.Visible = false;
+                    btnAgregar.Visible = false;
+                    btnEliminar.Visible = false;
+                }
+
                 LlenarGrid();
                 LlenarDropdownEstados();
                 LlenarDropdownEquipos();
+
+
             }
         }
 
@@ -28,8 +51,9 @@ namespace ProyectoFinal_Progra2
             string constr = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT *  FROM Reparaciones"))
+                using (SqlCommand cmd = new SqlCommand("CONSULTAR_REPARACIONESUSUARIO @LOGIN =" + objsystemuser.GetLogin() + ", @ROLID = " + objsystemuser.GetRol()))
                 {
+                    
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
                         cmd.Connection = con;
@@ -51,6 +75,7 @@ namespace ProyectoFinal_Progra2
             {
                 using (SqlCommand cmd = new SqlCommand("Consulta_Estados"))
                 {
+
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
                         cmd.Connection = con;
@@ -129,25 +154,38 @@ namespace ProyectoFinal_Progra2
 
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
-            int codigo = int.Parse(txtReparacionID.Text);
-            string constr = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
+            
+
+            bool check = int.TryParse(txtReparacionID.Text, out int a);
+
+            if (check)
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM Reparaciones WHERE ReparacionID ='" + codigo + "'"))
-
-
-                using (SqlDataAdapter sda = new SqlDataAdapter())
+                int codigo = int.Parse(txtReparacionID.Text);
+                string constr = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
+                using (SqlConnection con = new SqlConnection(constr))
                 {
-                    cmd.Connection = con;
-                    sda.SelectCommand = cmd;
-                    using (DataTable dt = new DataTable())
+                    using (SqlCommand cmd = new SqlCommand("CONSULTAR_REPARACIONESUSUARIO_ID @ID =" + codigo))
+
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
-                        sda.Fill(dt);
-                        gvReparaciones.DataSource = dt;
-                        gvReparaciones.DataBind();  // actualizar el grid view
+                        cmd.Connection = con;
+                        sda.SelectCommand = cmd;
+                        using (DataTable dt = new DataTable())
+                        {
+                            sda.Fill(dt);
+                            gvReparaciones.DataSource = dt;
+                            gvReparaciones.DataBind();  // actualizar el grid view
+                        }
                     }
                 }
             }
+            else
+            {
+                LlenarGrid();
+            }
+
+            
         }
 
 
@@ -161,7 +199,7 @@ namespace ProyectoFinal_Progra2
 
             if (codigo)
             {
-                resultado = Reparacion.ModificarID(int.Parse(txtReparacionID.Text), int.Parse(ddlEquipoID.Text), char.Parse(ddlEstado.Text));
+                resultado = Reparacion.ModificarID(int.Parse(txtReparacionID.Text), int.Parse(ddlEquipoID.Text), char.Parse(ddlEstado.Text), objsystemuser.GetRol());
             }
             else
             {

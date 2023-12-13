@@ -6,6 +6,9 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using System.Web.UI.WebControls;
+using System.Drawing;
+using System.Security.Cryptography;
+using System.Runtime.CompilerServices;
 
 namespace ProyectoFinal_Progra2.Classes
 {
@@ -14,6 +17,8 @@ namespace ProyectoFinal_Progra2.Classes
         //atributos
         private static string LogInUser;
         private static string Clave;
+        private static int Rol;
+        private static string NombreRol;
 
         //constructor
         public SystemUser()
@@ -40,52 +45,81 @@ namespace ProyectoFinal_Progra2.Classes
             Clave = clave;
         }
 
+        public int GetRol()
+        {
+            return Rol;
+        }
+
+        public void SetRol(int rol)
+        {
+            Rol = rol;
+        }
+
+        public string GetNombreRol()
+        {
+            return NombreRol;
+        }
+
+        public void SetNombreRol(string nombreRol)
+        {
+            NombreRol = nombreRol;
+        }
+
+
         public static int ValidarLogin()
         {
-            int retorno = 0;
-            int tipo = 0;
+            int retorno = 0;        
+          
             SqlConnection Conn = new SqlConnection();
             try
             {
                 using (Conn = DBConn.obtenerConexion())
                 {
-                    SqlCommand cmd = new SqlCommand("VALIDAR_USUARIO", Conn)
+                    using (SqlCommand cmd = new SqlCommand("VALIDAR_USUARIO", Conn)
                     {
                         CommandType = CommandType.StoredProcedure
-                    };
-                    cmd.Parameters.Add(new SqlParameter("@loginuser", LogInUser));
-                    cmd.Parameters.Add(new SqlParameter("@clave", Clave));
-
-                    retorno = cmd.ExecuteNonQuery();
-                    using (SqlDataReader lectura = cmd.ExecuteReader())
+                    })
                     {
-                        if (lectura.Read())
+                        cmd.Parameters.Add(new SqlParameter("@loginuser", LogInUser));
+                        cmd.Parameters.Add(new SqlParameter("@clave", Clave));
+                        using (SqlDataAdapter SDA = new SqlDataAdapter())
                         {
-                            retorno = 1;
+                            SDA.SelectCommand = cmd;
+                            using (DataTable dt = new DataTable())
+                            {
+                                SDA.Fill(dt);
+                                if(dt.Rows.Count < 1)
+                                {
+                                    retorno = -2;
+                                }
+                                else
+                                {
+                                    Rol = int.Parse(dt.Rows[0]["RolID"].ToString());
+                                    NombreRol = dt.Rows[0]["NombreRol"].ToString();
+                                    retorno = 1;
+                                }
 
-                        }
-                        else
-                        {
-                            retorno = -1;
+                                
+                            }
                         }
 
                     }
-
-
                 }
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
-                retorno = -1;
+                retorno = -3;
             }
             finally
             {
                 Conn.Close();
-                Conn.Dispose();
             }
-
+          
             return retorno;
         }
+
+       
+        
         public static int Agregar(string loginuser, string clave)
         {
             int retorno = 0;
@@ -104,6 +138,8 @@ namespace ProyectoFinal_Progra2.Classes
 
 
                     retorno = cmd.ExecuteNonQuery();
+
+
                 }
             }
             catch (System.Data.SqlClient.SqlException ex)
@@ -112,6 +148,7 @@ namespace ProyectoFinal_Progra2.Classes
             }
             finally
             {
+
                 Conn.Close();
             }
 
@@ -209,6 +246,7 @@ namespace ProyectoFinal_Progra2.Classes
                     cmd.Parameters.Add(new SqlParameter("@CLAVE", clave));
 
                     retorno = cmd.ExecuteNonQuery();
+                    
                 }
             }
             catch (System.Data.SqlClient.SqlException ex)

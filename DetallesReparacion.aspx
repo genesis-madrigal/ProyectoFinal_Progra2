@@ -14,6 +14,7 @@
                     <asp:BoundField DataField="DetalleID" HeaderText="ID de los detalles" SortExpression="DetalleID" />
                     <asp:BoundField DataField="ReparacionID" HeaderText="ID de la Reparación" SortExpression="ReparacionID" />
                     <asp:BoundField DataField="Descripcion" HeaderText="Descripción" SortExpression="Descripcion" />
+                    <asp:BoundField DataField="Tecnico" HeaderText="Nombre del Técnico" SortExpression="Tecnico" />
                     <asp:BoundField DataField="FechaInicio" HeaderText="Fecha de Asignación" SortExpression="FechaInicio" />
                     <asp:BoundField DataField="FechaFin" HeaderText="Fecha de Finalización" SortExpression="FechaFin" />
                 </Columns>
@@ -49,7 +50,7 @@
         <asp:Button ID="btnEliminar" class="btn btn-outline-dark" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" />
             <br />
 
-         <asp:Label ID="lblTest" class="lead" runat="server" Text="TEST"></asp:Label>
+         
        </div>
 
 </asp:Content>

@@ -13,10 +13,31 @@ namespace ProyectoFinal_Progra2
 {
     public partial class Asignaciones : System.Web.UI.Page
     {
+
+        private static Classes.SystemUser objsystemuser;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+
+                objsystemuser = new Classes.SystemUser();
+
+                objsystemuser.SetLogin(Session["LogInUser"].ToString());
+                objsystemuser.SetRol(int.Parse(Session["RolID"].ToString()));
+
+                if (objsystemuser.GetRol() == 2)
+                {
+                    lblReparacionID.Visible = false;
+                    lblTecnicoID.Visible = false;
+                    ddlReparacion.Visible = false;
+                    ddlTecnicos.Visible = false;
+                    btnAgregar.Visible = false;
+                    btnModificar.Visible = false;
+                    btnEliminar.Visible = false;
+                }
+                
+
                 LlenarGrid();
 
                 LlenarDropdownTecnico();
@@ -30,7 +51,7 @@ namespace ProyectoFinal_Progra2
             string constr = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT *  FROM Asignaciones"))
+                using (SqlCommand cmd = new SqlCommand("CONSULTAR_ASIGNACIONES @LOGIN =" + objsystemuser.GetLogin() + ", @ROLID = " + objsystemuser.GetRol()))
                 {
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
@@ -77,7 +98,7 @@ namespace ProyectoFinal_Progra2
             string constr = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("CONSULTAR_REPARACIONES"))
+                using (SqlCommand cmd = new SqlCommand("CONSULTAR_REPARACIONES @LOGIN =" + objsystemuser.GetLogin() + ", @ROLID = " + objsystemuser.GetRol()))
                 {
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
@@ -136,25 +157,37 @@ namespace ProyectoFinal_Progra2
 
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
-            int codigo = int.Parse(txtAsignacionID.Text);
-            string constr = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
+            
+            bool check = int.TryParse(txtAsignacionID.Text, out int a);
+
+            if (check)
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM Asignaciones WHERE AsignacionID ='" + codigo + "'"))
-
-
-                using (SqlDataAdapter sda = new SqlDataAdapter())
+                int codigo = int.Parse(txtAsignacionID.Text);
+                string constr = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
+                using (SqlConnection con = new SqlConnection(constr))
                 {
-                    cmd.Connection = con;
-                    sda.SelectCommand = cmd;
-                    using (DataTable dt = new DataTable())
+                    using (SqlCommand cmd = new SqlCommand("CONSULTAR_ASIGNACIONES_ID @CODIGO =" + codigo + ",@LOGIN =" + objsystemuser.GetLogin() + ", @ROLID = " + objsystemuser.GetRol()))
+
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
-                        sda.Fill(dt);
-                        gvAsignaciones.DataSource = dt;
-                        gvAsignaciones.DataBind();  // actualizar el grid view
+                        cmd.Connection = con;
+                        sda.SelectCommand = cmd;
+                        using (DataTable dt = new DataTable())
+                        {
+                            sda.Fill(dt);
+                            gvAsignaciones.DataSource = dt;
+                            gvAsignaciones.DataBind();  // actualizar el grid view
+                        }
                     }
                 }
             }
+            else
+            {
+                LlenarGrid();
+            }
+
+            
         }
 
        

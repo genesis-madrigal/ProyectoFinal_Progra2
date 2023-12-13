@@ -5,7 +5,7 @@
 
     <div class="container text-center"> 
            
-       <h1 class="display-3"> &nbsp;</h1>
+       <h1 class="display-3"></h1>
            <h1 class="display-3"> Reporte de Información General </h1>
            <p class="display-3"> &nbsp;</p>
 
@@ -14,7 +14,7 @@
             <br />
             <asp:GridView ID="gvReporte" runat="server" AutoGenerateColumns="False" CssClass="mydatagrid" PagerStyle-CssClass="pager" HeaderStyle-CssClass="header" RowStyle-CssClass="rows" AllowPaging="True">
                 <Columns>
-                    <asp:BoundField DataField="ID Usuario" HeaderText="ID de la Reparación" SortExpression="ID Usuario" />
+                    <asp:BoundField DataField="ID Usuario" HeaderText="ID del Usuario" SortExpression="ID Usuario" />
                     <asp:BoundField DataField="Telefono" HeaderText="Télefono" SortExpression="Telefono" />
                     <asp:BoundField DataField="CorreoElectronico" HeaderText="Correo Electrónico" SortExpression="CorreoElectronico" />
                     <asp:BoundField DataField="ID Equipo" HeaderText="ID del Equipo" SortExpression="ID Equipo" />

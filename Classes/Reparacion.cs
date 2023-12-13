@@ -135,7 +135,7 @@ namespace ProyectoFinal_Progra2.Classes
 
             return retorno;
         }
-        public static int ModificarID(int reparacionid, int equipoid, char estado)
+        public static int ModificarID(int reparacionid, int equipoid, char estado, int rol)
         {
             int retorno = 0;
 
@@ -151,6 +151,7 @@ namespace ProyectoFinal_Progra2.Classes
                     cmd.Parameters.Add(new SqlParameter("@CODIGO", reparacionid));
                     cmd.Parameters.Add(new SqlParameter("@EQUIPOID", equipoid));
                     cmd.Parameters.Add(new SqlParameter("@ESTADO", estado));
+                    cmd.Parameters.Add(new SqlParameter("@ROLID", rol));
 
                     retorno = cmd.ExecuteNonQuery();
                 }

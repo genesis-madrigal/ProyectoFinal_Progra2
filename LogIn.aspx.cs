@@ -15,23 +15,29 @@ namespace ProyectoFinal_Progra2
 
         }
 
+        
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
             Classes.SystemUser objsystemuser = new Classes.SystemUser();
 
             objsystemuser.SetLogin(txtUsuario.Text);
             objsystemuser.SetClave(txtClave.Text);
-
-
+                      
+            
             if (SystemUser.ValidarLogin() > 0)
-            {
+            {                
+                Session["LogInUser"] = objsystemuser.GetLogin();
+                Session["RolID"] = objsystemuser.GetRol();
+                Session["NombreRol"] = objsystemuser.GetNombreRol();
                 Response.Redirect("Home.aspx");
             }
 
-
+            
 
 
 
         }
+
+
     }
 }

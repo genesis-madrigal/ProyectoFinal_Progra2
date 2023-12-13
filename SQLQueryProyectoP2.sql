@@ -26,7 +26,7 @@ GO
 CREATE TABLE Tecnicos (
     TecnicoID int identity(1,1) PRIMARY KEY,
     Nombre varchar(50),
-    Especialidad varchar(20),
+    Especialidad varchar(20)
 )
 GO
 
@@ -39,24 +39,23 @@ CREATE TABLE SystemUsers
 GO
 
 CREATE TABLE SystemUUsuarios (
-	SystemUID varchar(15) NOT NULL,
+	SystemUID int identity(1,1) PRIMARY KEY,
 	UsuarioID int NOT NULL,
-	LogInUser varchar(15) NOT NULL,
-	CONSTRAINT PK_systemuid PRIMARY KEY (SystemUID),
+	LogInUser varchar(15) NOT NULL,	
 	CONSTRAINT fk_usuarioIDSystem FOREIGN KEY(UsuarioID) REFERENCES Usuarios(UsuarioID),
 	CONSTRAINT fk_SystemLoginU FOREIGN KEY(LogInUser) REFERENCES SystemUsers(LogInUser)
 )
 GO
 
 CREATE TABLE SystemUTecnicos (
-	SystemTID varchar(15) NOT NULL,
+	SystemTID int identity(1,1) PRIMARY KEY,
 	TecnicoID int NOT NULL,
-	LogInUser varchar(15) NOT NULL,
-	CONSTRAINT PK_systemtid PRIMARY KEY (SystemTID),
+	LogInUser varchar(15) NOT NULL,	
 	CONSTRAINT fk_tecnicoIDSystem FOREIGN KEY(TecnicoID) REFERENCES Tecnicos(TecnicoID),
 	CONSTRAINT fk_SystemLoginT FOREIGN KEY(LogInUser) REFERENCES SystemUsers(LogInUser)
 )
 GO
+
 
 
 CREATE TABLE Reparaciones (
@@ -186,6 +185,20 @@ INSERT INTO SystemUsers(LogInUser, Clave) VALUES
 ('tom', 789)
 GO
 
+INSERT INTO SystemUUsuarios(UsuarioID, LogInUser) VALUES
+(1, 'oscar'),
+(2, 'pedro'),
+(3, 'tom')
+
+GO
+
+
+INSERT INTO SystemUTecnicos(TecnicoID, LogInUser) VALUES
+(1, 'edward'),
+(2, 'jacob'),
+(6, 'alice')
+GO
+
 
 INSERT INTO UserRoles VALUES('oscar', 1), ('pedro', 1), ('tom', 2);
 GO
@@ -236,18 +249,52 @@ GO
 
 
 CREATE PROCEDURE CONSULTAR_DetallesReparacion
+@LOGIN VARCHAR(15),
+@ROLID INT
 AS
 	BEGIN
-		SELECT * FROM DetallesReparacion
+		IF @ROLID = 2
+			BEGIN
+				SELECT DR.DetalleID, DR.ReparacionID, DR.Descripcion, T.Nombre AS Tecnico, DR.FechaInicio, DR.FechaFin FROM DetallesReparacion DR
+				LEFT JOIN Asignaciones A ON DR.ReparacionID = A.ReparacionID
+				LEFT JOIN SystemUTecnicos SU ON A.TecnicoID = SU.TecnicoID 
+				LEFT JOIN Tecnicos T ON A.TecnicoID = T.TecnicoID
+				WHERE SU.LogInUser = @LOGIN				
+			END
+		ELSE
+			BEGIN
+				SELECT DR.DetalleID, DR.ReparacionID, DR.Descripcion, T.Nombre AS Tecnico, DR.FechaInicio, DR.FechaFin FROM DetallesReparacion DR
+				LEFT JOIN Asignaciones A ON DR.ReparacionID = A.ReparacionID				
+				LEFT JOIN Tecnicos T ON A.TecnicoID = T.TecnicoID
+			END
 	END
 GO
 
-CREATE PROCEDURE CONSULTAR_Asignaciones
+
+CREATE PROCEDURE CONSULTAR_DetallesReparacion_ID
+@CODIGO INT,
+@LOGIN VARCHAR(15),
+@ROLID INT
 AS
 	BEGIN
-		SELECT * FROM Asignaciones
+		IF @ROLID = 2
+			BEGIN
+				SELECT DR.DetalleID, DR.ReparacionID, DR.Descripcion, T.Nombre AS Tecnico, DR.FechaInicio, DR.FechaFin FROM DetallesReparacion DR
+				LEFT JOIN Asignaciones A ON DR.ReparacionID = A.ReparacionID
+				LEFT JOIN SystemUTecnicos SU ON A.TecnicoID = SU.TecnicoID 
+				LEFT JOIN Tecnicos T ON A.TecnicoID = T.TecnicoID
+				WHERE SU.LogInUser = @LOGIN AND DR.DetalleID = @CODIGO
+			END
+		ELSE
+			BEGIN
+				SELECT DR.DetalleID, DR.ReparacionID, DR.Descripcion, T.Nombre AS Tecnico, DR.FechaInicio, DR.FechaFin FROM DetallesReparacion DR
+				LEFT JOIN Asignaciones A ON DR.ReparacionID = A.ReparacionID				
+				LEFT JOIN Tecnicos T ON A.TecnicoID = T.TecnicoID
+				WHERE DR.DetalleID = @CODIGO
+			END
 	END
 GO
+
 
 CREATE PROCEDURE CONSULTAR_USERROLES
 AS
@@ -255,11 +302,23 @@ AS
 		SELECT * FROM UserRoles
 	END
 GO
-
+DROP PROCEDURE CONSULTAR_REPARACIONES
 CREATE PROCEDURE CONSULTAR_REPARACIONES
+@LOGIN VARCHAR(15),
+@ROLID INT
 AS
 	BEGIN
-		SELECT * FROM Reparaciones
+		IF @ROLID = 2
+			BEGIN
+				SELECT R.ReparacionID, R.EquipoID, R.FechaSolicitud, R.Estado FROM Reparaciones R
+				LEFT JOIN Asignaciones A ON R.ReparacionID = A.ReparacionID
+				LEFT JOIN SystemUTecnicos SU ON A.TecnicoID = SU.TecnicoID 
+				WHERE SU.LogInUser = @LOGIN
+			END
+		ELSE
+			BEGIN
+				SELECT * FROM Reparaciones
+			END
 	END
 GO
 
@@ -270,19 +329,24 @@ AS
 	END
 GO
 
-CREATE PROCEDURE CONSULTAR_DetallesReparacion_ID
-@CODIGO INT
- AS
-	BEGIN
-	  SELECT * FROM DetallesReparacion WHERE DetalleID = @CODIGO
-	END
-GO
 
-CREATE PROCEDURE CONSULTAR_Asignaciones_ID
-@CODIGO INT
- AS
+CREATE PROCEDURE CONSULTAR_ASIGNACIONES_ID
+@CODIGO INT,
+@LOGIN VARCHAR(15),
+@ROLID INT
+AS
 	BEGIN
-	  SELECT * FROM Asignaciones WHERE AsignacionID = @CODIGO
+		IF @ROLID = 2
+			BEGIN
+				SELECT A.AsignacionID AS AsignacionID, A.ReparacionID AS ReparacionID, A.TecnicoID AS TecnicoID, A.FechaAsignacion AS FechaAsignacion FROM Asignaciones A
+				LEFT JOIN SystemUTecnicos SU ON A.TecnicoID = SU.TecnicoID 
+				WHERE SU.LogInUser = @LOGIN AND A.AsignacionID = @CODIGO
+			END
+		ELSE
+			BEGIN
+				SELECT A.AsignacionID AS AsignacionID, A.ReparacionID AS ReparacionID, A.TecnicoID AS TecnicoID, A.FechaAsignacion AS FechaAsignacion FROM Asignaciones A
+				WHERE A.AsignacionID = @CODIGO
+			END
 	END
 GO
 
@@ -349,7 +413,7 @@ GO
 
 CREATE PROCEDURE INSERTAR_TECNICO
 @NOMBRE VARCHAR(50),
-@ESPECIALIDAD VARCHAR(50)
+@ESPECIALIDAD VARCHAR(20)
 AS 
 	BEGIN
 		INSERT INTO Tecnicos(Nombre, Especialidad) VALUES (@NOMBRE, @ESPECIALIDAD)
@@ -361,7 +425,7 @@ CREATE PROCEDURE INSERTAR_USERROLES
 @ROLID INT
 AS 
 	BEGIN
-		INSERT INTO UserRoles(LogInUser, RolID) VALUES (@LOGINUSER, @ROLID)
+		INSERT INTO UserRoles(LogInUser, RolID) VALUES (@LOGINUSER, @ROLID)		
 	END
 GO
 
@@ -395,11 +459,16 @@ GO
 CREATE PROCEDURE INSERTAR_DETALLESREPARACION
 @REPARACIONID VARCHAR(50),
 @DESCRIPCION VARCHAR(50),
-@FECHAFIN VARCHAR(50)
+@FECHAFIN DATETIME
 AS 
 	BEGIN
 		INSERT INTO DetallesReparacion(ReparacionID, Descripcion, FechaFin) VALUES (@REPARACIONID, @DESCRIPCION, @FECHAFIN)
 	END
+GO
+
+
+INSERT INTO DetallesReparacion(ReparacionID, Descripcion, FechaFin) VALUES (3, 'Arreglar joycon', '2023-12-14')
+
 GO
 
 CREATE PROCEDURE BORRAR_EQUIPO
@@ -459,12 +528,13 @@ END
 GO
 
 CREATE PROCEDURE BORRAR_SYSTEMUSERS
-@CODIGO INT
+@CODIGO VARCHAR(15)
  AS
 	BEGIN
 	  DELETE SystemUsers WHERE LogInUser = @CODIGO
 END
 GO
+
 
 CREATE PROCEDURE ACTUALIZAR_EQUIPOID
 @CODIGO INT,
@@ -503,12 +573,13 @@ CREATE PROCEDURE ACTUALIZAR_DETALLESREPARACION
 @CODIGO INT,
 @REPARACIONID INT,
 @DESCRIPCION VARCHAR(50),
-@FECHAFIN INT
+@FECHAFIN DATETIME
 AS
 	BEGIN
 		UPDATE DetallesReparacion SET ReparacionID = @REPARACIONID, Descripcion = @DESCRIPCION, FechaFin = @FECHAFIN WHERE DetalleID=@CODIGO
 	END
 GO
+
 
 CREATE PROCEDURE ACTUALIZAR_ASIGNACIONES
 @CODIGO INT,
@@ -534,10 +605,19 @@ GO
 CREATE PROCEDURE ACTUALIZAR_REPARACIONES
 @CODIGO INT,
 @EQUIPOID INT,
-@ESTADO CHAR(1)
+@ESTADO CHAR(1),
+@ROLID INT
 AS
 	BEGIN
-		UPDATE Reparaciones SET EquipoID = @EQUIPOID, Estado = @ESTADO WHERE ReparacionID=@CODIGO
+		IF @ROLID = 2
+			BEGIN
+				UPDATE Reparaciones SET Estado = @ESTADO WHERE ReparacionID=@CODIGO
+			END
+		ELSE
+			BEGIN
+				UPDATE Reparaciones SET EquipoID = @EQUIPOID, Estado = @ESTADO WHERE ReparacionID=@CODIGO
+			END
+		
 	END
 GO
 
@@ -556,11 +636,21 @@ CREATE PROCEDURE VALIDAR_USUARIO
 
 	As
 		Begin
-			Select LogInUser, Clave FROM SystemUsers WHERE LogInUser = @loginuser and Clave = @clave
+			Select SU.LogInUser AS LogInUser, SU.Clave AS Clave, UR.RolID AS RolID, R.nombreRol AS NombreRol  
+			FROM SystemUsers SU
+			INNER JOIN UserRoles UR ON SU.LogInUser = UR.LogInUser
+			INNER JOIN Roles R ON UR.RolID = R.RolID
+			WHERE SU.LogInUser = @loginuser and SU.Clave = @clave
 		End
 
 GO
 
+SELECT * FROM Roles
+SELECT * FROM SystemUsers
+
+SELECT SU.LogInUser AS LogInUser, SU.Clave AS Clave, UR.RolID AS RolID  FROM SystemUsers SU
+			INNER JOIN UserRoles UR ON SU.LogInUser = UR.LogInUser
+			WHERE SU.LogInUser = 'oscar' and SU.Clave = '123'
 
 INSERT INTO Estados Values ('A', 'Anulado'), ('C', 'Cancelado'), ('I', 'Ingresado'), ('P', 'Pendiente'), ('T', 'Terminado')
 
@@ -590,6 +680,91 @@ as
 	End 
 
 GO
+
+
+CREATE PROCEDURE CONSULTAR_REPARACIONESUSUARIO
+@LOGIN VARCHAR(15),
+@ROLID INT
+AS
+	BEGIN
+		IF @ROLID = 3
+			BEGIN
+				SELECT R.ReparacionID AS ReparacionID, E.EquipoID AS EquipoID, E.Modelo AS Modelo, U.Nombre AS Nombre, T.Nombre AS Tecnico, R.FechaSolicitud AS FechaSolicitud, R.Estado + ' - ' + S.Descripcion AS Estado  FROM Reparaciones R 
+				LEFT JOIN Asignaciones A ON R.ReparacionID = A.ReparacionID
+				LEFT JOIN Tecnicos T ON A.TecnicoID = T.TecnicoID				
+				INNER JOIN Equipos E ON R.EquipoID = E.EquipoID
+				INNER JOIN Usuarios U ON E.UsuarioID = U.UsuarioID
+				LEFT JOIN SystemUUsuarios SU ON U.UsuarioID = SU.UsuarioID
+				INNER JOIN Estados S ON R.Estado = S.id
+				WHERE SU.LogInUser = @LOGIN
+			END
+		ELSE IF @ROLID = 2
+			BEGIN
+				SELECT R.ReparacionID AS ReparacionID, E.EquipoID AS EquipoID, E.Modelo AS Modelo, U.Nombre AS Nombre, T.Nombre AS Tecnico, R.FechaSolicitud AS FechaSolicitud, R.Estado + ' - ' + S.Descripcion AS Estado  FROM Reparaciones R 
+				LEFT JOIN Asignaciones A ON R.ReparacionID = A.ReparacionID
+				LEFT JOIN Tecnicos T ON A.TecnicoID = T.TecnicoID
+				LEFT JOIN SystemUTecnicos SU ON T.TecnicoID = SU.TecnicoID
+				INNER JOIN Equipos E ON R.EquipoID = E.EquipoID
+				INNER JOIN Usuarios U ON E.UsuarioID = U.UsuarioID
+				INNER JOIN Estados S ON R.Estado = S.id
+				WHERE SU.LogInUser = @LOGIN
+			END
+		ELSE
+			BEGIN
+				SELECT R.ReparacionID AS ReparacionID, E.EquipoID AS EquipoID, E.Modelo AS Modelo, U.Nombre AS Nombre, T.Nombre AS Tecnico, R.FechaSolicitud AS FechaSolicitud, R.Estado + ' - ' + S.Descripcion AS Estado  FROM Reparaciones R 
+				LEFT JOIN Asignaciones A ON R.ReparacionID = A.ReparacionID
+				LEFT JOIN Tecnicos T ON A.TecnicoID = T.TecnicoID				
+				INNER JOIN Equipos E ON R.EquipoID = E.EquipoID
+				INNER JOIN Usuarios U ON E.UsuarioID = U.UsuarioID
+				INNER JOIN Estados S ON R.Estado = S.id
+			END
+	END
+GO
+
+
+CREATE PROCEDURE CONSULTAR_ASIGNACIONES
+@LOGIN VARCHAR(15),
+@ROLID INT
+AS
+	BEGIN
+		IF @ROLID = 2
+			BEGIN
+				SELECT A.AsignacionID AS AsignacionID, A.ReparacionID AS ReparacionID, A.TecnicoID AS TecnicoID, A.FechaAsignacion AS FechaAsignacion FROM Asignaciones A
+				LEFT JOIN SystemUTecnicos SU ON A.TecnicoID = SU.TecnicoID 
+				WHERE SU.LogInUser = @LOGIN
+			END
+		ELSE
+			BEGIN
+				SELECT A.AsignacionID AS AsignacionID, A.ReparacionID AS ReparacionID, A.TecnicoID AS TecnicoID, A.FechaAsignacion AS FechaAsignacion FROM Asignaciones A
+			END
+	END
+
+
+
+
+
+
+
+
+/*WIP*/
+SELECT * FROM [dbo].[SystemUTecnicos]
+SELECT * FROM [dbo].[SystemUUsuarios]
+SELECT * FROM Reparaciones
+SELECT * FROM [dbo].[Usuarios]
+SELECT * FROM [dbo].[SystemUsers]
+SELECT * FROM UserRoles
+
+CREATE PROCEDURE CONSULTAR_REPARACIONESUSUARIO_ID
+@ID INT
+AS
+	BEGIN
+		SELECT R.ReparacionID AS ReparacionID, E.EquipoID AS EquipoID, E.Modelo AS Modelo, U.Nombre AS Nombre, R.FechaSolicitud AS FechaSolicitud, R.Estado + ' - ' + S.Descripcion AS Estado  FROM Reparaciones R 
+		INNER JOIN Equipos E ON R.EquipoID = E.EquipoID
+		INNER JOIN Usuarios U ON E.UsuarioID = U.UsuarioID
+		INNER JOIN Estados S ON R.Estado = S.id
+		WHERE R.ReparacionID = @ID
+	END
+
 
 
 

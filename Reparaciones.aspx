@@ -14,6 +14,9 @@
                 <Columns>
                     <asp:BoundField DataField="ReparacionID" HeaderText="ID de la Reparación" SortExpression="ReparacionID" />
                     <asp:BoundField DataField="EquipoID" HeaderText="ID del Equipo" SortExpression="EquipoID" />
+                    <asp:BoundField DataField="Modelo" HeaderText="Modelo del Equipo" SortExpression="Modelo" />
+                    <asp:BoundField DataField="Nombre" HeaderText="Nombre del Cliente" SortExpression="Nombre" />
+                    <asp:BoundField DataField="Tecnico" HeaderText="Nombre del Tecnico" SortExpression="Tecnico" />
                     <asp:BoundField DataField="FechaSolicitud" HeaderText="Fecha de la Solicitud" SortExpression="FechaSolicitud" />
                     <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado" />
                 </Columns>
@@ -31,6 +34,7 @@
            <p> 
                &nbsp;</p>
            <p> 
+               <div id="form" runat="server">
             <asp:Label ID="lblReparacionID" class="lead" runat="server" Text="ID de la Reparación:"></asp:Label>
         </p> 
         <asp:TextBox ID="txtReparacionID"  class="round form-control" runat="server"></asp:TextBox>
@@ -59,7 +63,7 @@
         <asp:Button ID="btnConsultar" class="btn btn-outline-dark" runat="server" Text="Consultar" OnClick="btnConsultar_Click" />
         <asp:Button ID="btnModificar" class="btn btn-outline-dark" runat="server" Text="Modificar" OnClick="btnModificar_Click" />
         <asp:Button ID="btnEliminar" class="btn btn-outline-dark" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" />
-
+        </div>
         <br />
  
   </div> 

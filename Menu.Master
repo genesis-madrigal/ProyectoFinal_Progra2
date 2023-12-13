@@ -7,11 +7,11 @@
     <title>Extreme Tech Upgrades | Tecnología a su alcance</title>
 
     <meta charset="UTF-8">
+  
     <link href="css/style.css" rel="stylesheet" />
-    
     <link href="css/CSS.css" rel="stylesheet" />
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="css/myStyle.css" rel="stylesheet" />
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -20,28 +20,64 @@
             width: 88px;
             height: 85px;
         }
+
+        .nav {
+            background: #f75959;
+              background: -moz-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
+              background: -webkit-gradient(left top, right bottom, color-stop(0%, #f75959), color-stop(100%, #f35587));
+              background: -webkit-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
+              background: -o-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
+              background: -ms-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
+              background: -webkit-linear-gradient(315deg, #f75959 0%, #f35587 100%);
+              background: -o-linear-gradient(315deg, #f75959 0%, #f35587 100%);
+              background: linear-gradient(135deg, #f75959 0%, #f35587 100%);
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f75959', endColorstr='#f35587', GradientType=1 );
+              color: #fff; 
+
+        }          
+
+        
+               
+
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
         
-        <nav class="navbar navbar-light" style="background-color: #dce6f2;">
-        <nav class="nav nav-pills flex-column flex-sm-row">
-            <img src="Images/Screenshot_2023-11-20_235107-removebg-preview.png" class="auto-style1"/>
-            <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="Home.aspx">Inicio</a>
-            <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="Usuarios.aspx">Usuarios</a>
-            <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="Tecnicos.aspx">Técnicos</a>
-           <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="Equipos.aspx">Equipos</a>
-           <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="Asignaciones.aspx">Asignaciones</a>
-           <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="Reparaciones.aspx">Reparaciones</a>
-           <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="DetallesReparacion.aspx">Detalles de las reparaciones</a>
-           <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="SystemUsers.aspx">Usuarios del sistema</a>
-           <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="UserRoles.aspx">Reporte de Roles</a>
-           <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="ReporteGeneral.aspx">Reporte General</a>
-           <a class="flex-sm-fill text-sm-center nav-link align-self-center" href="LogIn.aspx">Cerrar Sesión</a>
-        </nav>
-    </nav>
+        
+        <nav class="nav main-nav nav-pills flex-column flex-sm-row" style="background-color: #E65170ff; color: white">
+           <img src="Images/logo.png" class="auto-style1"/>
+           <a class="linksW flex-sm-fill text-sm-center nav-link align-self-center" href="Home.aspx">Inicio</a>
+           <a id="btnUsuarios" class="linksW flex-sm-fill text-sm-center nav-link align-self-center" href="Usuarios.aspx" runat="server">Usuarios</a>            
+           <a id="btnTecnicos" class="linksW flex-sm-fill text-sm-center nav-link align-self-center" href="Tecnicos.aspx" runat="server">Técnicos</a>
+           <a id="btnEquipos" class="linksW flex-sm-fill text-sm-center nav-link align-self-center" href="Equipos.aspx" runat="server">Equipos</a>
+           <a id="btnAsignaciones" class="linksW flex-sm-fill text-sm-center nav-link align-self-center" href="Asignaciones.aspx" runat="server">Asignaciones</a>
+           <a id="btnReparaciones" class="linksW flex-sm-fill text-sm-center nav-link align-self-center" href="Reparaciones.aspx" runat="server">Reparaciones</a>
+           <a id="btnDetallesReparaciones" class="linksW flex-sm-fill text-sm-center nav-link align-self-center" href="DetallesReparacion.aspx" runat="server">Detalles de las reparaciones</a>
+           <a id="btnUsuariosSystem" class="linksW flex-sm-fill text-sm-center nav-link align-self-center" href="SystemUsers.aspx" runat="server">Usuarios del sistema</a>
+           <a id="btnReporteRoles" class="linksW flex-sm-fill text-sm-center nav-link align-self-center" href="UserRoles.aspx" runat="server">Reporte de Roles</a>
+           <a id="btnReporteGeneral" class="linksW flex-sm-fill text-sm-center nav-link align-self-center" href="ReporteGeneral.aspx" runat="server">Reporte General</a>           
+           <asp:LinkButton class="linksW flex-sm-fill text-sm-center nav-link align-self-center" id="btnLogout" Text="Cerrar Sesión" OnClick="btnLogOut_Click" runat="server"/>
+        </nav>        
+        <div class="container text-center sec-nav">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-6">
+                    <asp:Label ID="lblRol" class="display-6" runat="server" Text="" ></asp:Label>
 
+                    <!--
+                    <asp:Label ID="lblUser" class="display-6"  runat="server" Text="" ></asp:Label>
+                    -->
+                    <!--
+                    <a id="user" runat="server" href="#" class="btn btn-primary px-3"></a>
+                    <a id="rol" runat="server" href="#" class="btn btn-primary px-3"></a>
+
+                    -->
+                </div>
+                <div class="col"></div>
+            </div>
+            
+        </div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         
