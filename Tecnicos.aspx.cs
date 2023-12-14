@@ -17,7 +17,6 @@ namespace ProyectoFinal_Progra2
             if (!IsPostBack)
             {
                 LlenarGrid();
-                //Llenartipos();
             }
         }
 
